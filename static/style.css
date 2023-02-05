@@ -1,0 +1,84 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(300px, 1fr));
+    }
+
+.grid-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+
+.top-container {
+    display: flex;
+    padding-bottom: 4px;
+    justify-content: space-between;
+    }
+
+.top-button {
+    background-color: rgb(126, 126, 126);
+    color: white;
+    padding: 2px 12px;
+    border: none;
+    border-radius: 2px;
+    }
+
+.blue-button {
+    background-color: rgb(84, 100, 196);
+    color: white;
+    padding: 2px 12px;
+    border: none;
+    border-radius: 2px;
+    }
+
+.green-button {
+    background-color: rgb(78, 156, 70);
+    color: white;
+    padding: 2px 12px;
+    border: none;
+    border-radius: 2px;
+    }
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 4px;
+    }
+
+.good-image-button {
+    background-color: rgb(78, 156, 70);
+    color: white;
+    padding: 2px 12px;
+    border: none;
+    border-radius: 2px;
+    }
+
+.bad-image-button {
+    background-color: rgb(175, 81, 81);
+    color: white;
+    padding: 2px 12px;
+    border: none;
+    border-radius: 2px;
+    }
+
+.score-image-button {
+    background-color: rgb(126, 126, 126);
+    color: white;
+    padding: 2px 8px;
+    border: none;
+    border-radius: 2px;
+    }
+
+.flag-image-button {
+    background-color: rgb(84, 100, 196);
+    color: white;
+    padding: 2px 12px;
+    border: none;
+    border-radius: 2px;
+    }
+
+.custom-button:hover {
+    background-color: lightgray;
+    cursor: pointer;
+    }
