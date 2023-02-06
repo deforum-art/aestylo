@@ -119,5 +119,6 @@ if __name__ == '__main__':
     # init
     image_batches = []
     database = initialize_database(root_folder,database_file)
+    assert len(database) > n_samples, "change n_samples"
     image_batch = get_random_image(database, n_samples)
     app.run()
