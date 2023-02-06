@@ -11,12 +11,12 @@ app = Flask(__name__)
 
 @app.route('/')
 def images():
-    global image_batch, image_batches
+    global image_batch, image_batches, width
     image_batches += [image_batch]
     if len(image_batches) > 16:
         image_batches = image_batches[-16:]
     #print(image_batches)
-    return render_template('index.html', images=image_batch)
+    return render_template('index.html', images=image_batch, width=width)
 
 @app.route('/refresh')
 def refresh():
@@ -108,13 +108,15 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--root_folder", help="Path to the folder containing the images", required=True)
     parser.add_argument("--database_file", help="Name of the CSV file to store metadata about images (default: database.csv)", default="database.csv")
-    parser.add_argument("--n_samples", type=int, help="Number of images to display on the web page (default: 32)", default=32)
+    parser.add_argument("--n_samples", type=int, help="Number of images to display on the web page (default: 8)", default=8)
+    parser.add_argument("--width", type=int, help="Width of the grid images", default=400)
     args = parser.parse_args()
 
     # assign globals
     root_folder = args.root_folder
     database_file = args.database_file
     n_samples = args.n_samples
+    width = args.width
 
     # init
     image_batches = []

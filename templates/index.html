@@ -41,11 +41,18 @@
             <button class="top-button custom-button">refresh</button>
         </a>
     </div>
+    <style>
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax({{ width }}px, 1fr));
+        grid-template-rows: repeat(auto-fill, minmax(auto-fill, 1fr));
+        }
+    </style>
     <div class="grid-container">
         {% for image in images %}
             <div class="grid-item">
                 <a href="/image/{{ image }}">
-                    <img src="{{ url_for('image', image_name=image) }}" width="300" height="300">
+                    <img src="{{ url_for('image', image_name=image) }}" width="{{ width }}" style="width:100%; height:auto;">
                     <div class="button-container">
                         <form action="{{ url_for('assign_metadata', image_name=image) }}" method="post">
                             <input type="submit" value="good" class="good-image-button custom-button">
