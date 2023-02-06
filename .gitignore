@@ -1,0 +1,4 @@
+# Unnecessary compiled python files.
+__pycache__
+*.pyc
+*.pyo

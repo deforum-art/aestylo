@@ -1,4 +1,5 @@
 import pathlib
+import argparse
 from flask import Flask, render_template, send_file, redirect, request, url_for
 from helpers import get_random_image, initialize_database
 from prepare_training_data import prepare_training_data
@@ -7,10 +8,6 @@ from predict_score import predict_score
 from export_prediction import export_prediction
 
 app = Flask(__name__)
-
-root_folder = "path/to/images"
-database_file = "database.csv"
-n_samples = 32
 
 @app.route('/')
 def images():
@@ -107,6 +104,19 @@ def assign_metadata(image_name):
     return redirect('/')
 
 if __name__ == '__main__':
+    # parse arguments
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--root_folder", help="Path to the folder containing the images", required=True)
+    parser.add_argument("--database_file", help="Name of the CSV file to store metadata about images (default: database.csv)", default="database.csv")
+    parser.add_argument("--n_samples", type=int, help="Number of images to display on the web page (default: 32)", default=32)
+    args = parser.parse_args()
+
+    # assign globals
+    root_folder = args.root_folder
+    database_file = args.database_file
+    n_samples = args.n_samples
+
+    # init
     image_batches = []
     database = initialize_database(root_folder,database_file)
     image_batch = get_random_image(database, n_samples)

@@ -78,7 +78,7 @@ def export_prediction(root_folder, database_file, export_from):
     
     elif export_from == "score_pred":
         df = df[["path", "score_pred"]]
-        export_folder = Path(root_folder) / "export_score"
+        export_folder = Path(root_folder) / "export_score_pred"
         
         subfolder_1_2 = export_folder / "1_2"
         subfolder_2_3 = export_folder / "2_3"
