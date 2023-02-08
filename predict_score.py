@@ -39,3 +39,27 @@ def predict_score(root_folder, database_file, train_from, clip_model="ViT-L/14")
 
     database.to_csv(database_path,index=False)
     return database
+
+
+def print_stats(diff):
+    print(f"count: {len(diff)}")
+    print(f"max: {diff.max():0.4f}")
+    print(f"min: {diff.min():0.4f}")
+    print(f"mean: {diff.mean():0.4f}")
+    print(f"var: {diff.var():0.4f}")
+
+
+def validate_prediction(df):
+
+    all = df[df.score!=0]
+    diff = all["score"] - all["score_pred"]
+    print("all -----------------")
+    print_stats(diff)
+
+    for i in range(5,0,-1):
+        all = df[df.score==i]
+        diff = all["score"] - all["score_pred"]
+        print(f"{i} -----------------")
+        print_stats(diff)
+
+    return

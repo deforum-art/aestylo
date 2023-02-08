@@ -96,13 +96,13 @@ def export_prediction(root_folder, database_file, export_from):
         
         for index, row in df.iterrows():
             image_path = Path(root_folder) / row["path"]
-            if 1 <= row["score_pred"] < 2:
+            if row["score_pred"] < 2:
                 shutil.copy2(image_path, subfolder_1_2)
             elif 2 <= row["score_pred"] < 3:
                 shutil.copy2(image_path, subfolder_2_3)
             elif 3 <= row["score_pred"] < 4:
                 shutil.copy2(image_path, subfolder_3_4)
-            elif 4 <= row["score_pred"] < 5:
+            elif row["score_pred"] >= 4:
                 shutil.copy2(image_path, subfolder_4_5)
 
     if export_from == "flag":

@@ -146,7 +146,7 @@ def train_predictor(root_folder, train_from, clip_model="ViT-L/14", val_percenta
     #print("training done")
     # inferece test with dummy samples from the val set, sanity check
     #print( "inferece test with dummy samples from the val set, sanity check")
-    model.eval()
-    output = model(x[:5].to(device))
+    #model.eval()
+    #output = model(x[:5].to(device))
     #print(output.size())
     #print(output)
