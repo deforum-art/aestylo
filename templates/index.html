@@ -11,7 +11,7 @@
     <div class="top-container">
         <span class="branding">deforum:aestylo</span>
         <a href="{{ url_for('back') }}">
-            <button class="secondary-btn">Back</button>
+            <button class="secondary-btn session-btn">Back</button>
         </a>
         <form action="{{ url_for('train') }}" method="post">
             <input type="submit" value="Train from label (Good/Bad)" class="green-button btn">
@@ -44,7 +44,7 @@
         <a href="{{ url_for('refresh') }}">
             <button class="top-button btn">Refresh</button>
         </a>
-        <a href="start.html">
+        <a href="{{ url_for('start') }}">
             <button class="secondary-btn session-btn">New session</button>
         </a>
     </div>

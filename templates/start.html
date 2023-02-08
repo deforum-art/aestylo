@@ -28,9 +28,9 @@
                     <span class="start-sample" data-name="n_samples"><input type="number" name="n_samples" value="" size="5" aria-required="true" aria-invalid="false"></span> 
                 </p>
             </div>
-            <div class="start-button">
-                <input type="submit" value="Start" class="start-button">
-            </div>
+            <a href="{{ url_for('start_session') }}">
+                <button class="secondary-btn session-btn">Start</button>
+            </a>
         </form>
     </div>
 </body>

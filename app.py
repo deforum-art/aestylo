@@ -1,5 +1,5 @@
 import pathlib
-import argparse
+import pandas as pd
 from flask import Flask, render_template, send_file, redirect, request, url_for
 from helpers import get_random_image, initialize_database
 from prepare_training_data import prepare_training_data
@@ -11,12 +11,30 @@ app = Flask(__name__)
 
 @app.route('/')
 def images():
-    global image_batch, image_batches, width
+    global image_batch, image_batches, width, start_flag
     image_batches += [image_batch]
     if len(image_batches) > 16:
         image_batches = image_batches[-16:]
     #print(image_batches)
     return render_template('index.html', images=image_batch, width=width)
+
+@app.route('/start')
+def start():
+    return render_template("start.html")
+
+@app.route('/start_session', methods=['POST'])
+def start_session():
+    global root_folder, database_file, n_samples, image_batches, image_batch, width, database
+    root_folder = request.form['image-folder']
+    database_file = request.form['database-file']
+    n_samples = int(request.form['n_samples'])
+    
+    # init new session
+    image_batches = []
+    database = initialize_database(root_folder,database_file)
+    assert len(database) > n_samples, "change n_samples"
+    image_batch = get_random_image(database, n_samples)
+    return redirect('/')
 
 @app.route('/refresh')
 def refresh():
@@ -105,23 +123,15 @@ def assign_metadata(image_name):
     return redirect('/')
 
 if __name__ == '__main__':
-    # parse arguments
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--root_folder", help="Path to the folder containing the images", required=True)
-    parser.add_argument("--database_file", help="Name of the CSV file to store metadata about images (default: database.csv)", default="database.csv")
-    parser.add_argument("--n_samples", type=int, help="Number of images to display on the web page (default: 8)", default=8)
-    parser.add_argument("--width", type=int, help="Width of the grid images", default=400)
-    args = parser.parse_args()
 
-    # assign globals
-    root_folder = args.root_folder
-    database_file = args.database_file
-    n_samples = args.n_samples
-    width = args.width
-
-    # init
+    # init globals
+    root_folder = None
+    database_file = None
+    n_samples = None
+    width = 512
+    start_flag = True
     image_batches = []
-    database = initialize_database(root_folder,database_file)
-    assert len(database) > n_samples, "change n_samples"
-    image_batch = get_random_image(database, n_samples)
+    image_batch = []
+    database = pd.DataFrame({})
+
     app.run()
