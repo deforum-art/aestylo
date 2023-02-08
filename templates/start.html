@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>aestylo</title>
+    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"> -->
+    <link rel="stylesheet" type="text/css" href="C:\Users\kjell\Documents\dev\aestylo\static\style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+</head>
+<body class="start">
+    <div class="top-container">
+        <span class="branding">deforum:aestylo</span>
+    </div>
+    <div class="settings">
+        <form action="{{ url_for('start_session') }}" method="post" class="start-form" novalidate="novalidate" data-status="init">
+            <div class="start-inputfields">
+                <p>
+                    <label class="">Image folder</label><br>
+                    <span class="start-folder" data-name="image-folder"><input type="text" name="image-folder" value="" size="40" aria-required="true" aria-invalid="false"></span> 
+                </p>
+                <p>
+                    <label class="">Database file name</label><br>
+                    <span class="start-database" data-name="database-file"><input type="text" name="database-file" value="" size="40" aria-required="true" aria-invalid="false"></span> 
+                </p>
+                <p>
+                    <label class="">Number of Samples</label><br>
+                    <span class="start-sample" data-name="n_samples"><input type="number" name="n_samples" value="" size="5" aria-required="true" aria-invalid="false"></span> 
+                </p>
+            </div>
+            <div class="start-button">
+                <input type="submit" value="Start" class="start-button">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -3,42 +3,49 @@
 <head>
     <title>aestylo</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="top-container">
+        <span class="branding">deforum:aestylo</span>
         <a href="{{ url_for('back') }}">
-            <button class="top-button custom-button">back</button>
+            <button class="secondary-btn">Back</button>
         </a>
         <form action="{{ url_for('train') }}" method="post">
-            <input type="submit" value="train from label (good/bad)" class="green-button custom-button">
+            <input type="submit" value="Train from label (Good/Bad)" class="green-button btn">
             <input type="hidden" name="train_from" value="label">
         </form>
         <form action="{{ url_for('export') }}" method="post">
-            <input type="submit" value="export from label (good/bad)" class="green-button custom-button">
+            <input type="submit" value="Export from label (Good/Bad)" class="green-button btn">
             <input type="hidden" name="export_from" value="label">
         </form>
         <form action="{{ url_for('export') }}" method="post">
-            <input type="submit" value="export from label_pred (good/bad)" class="green-button custom-button">
+            <input type="submit" value="Export from label_pred (Good/Bad)" class="green-button btn">
             <input type="hidden" name="export_from" value="label_pred">
         </form>
         <form action="{{ url_for('train') }}" method="post">
-            <input type="submit" value="train from score (1-5)" class="top-button custom-button">
+            <input type="submit" value="Train from score (1-5)" class="top-button btn">
             <input type="hidden" name="train_from" value="score">
         </form>
         <form action="{{ url_for('export') }}" method="post">
-            <input type="submit" value="export from score (1-5)" class="top-button custom-button">
+            <input type="submit" value="Export from score (1-5)" class="top-button btn">
             <input type="hidden" name="export_from" value="score">
         </form>
         <form action="{{ url_for('export') }}" method="post">
-            <input type="submit" value="export from score_pred (1-5)" class="top-button custom-button">
+            <input type="submit" value="Export from score_pred (1-5)" class="top-button btn">
             <input type="hidden" name="export_from" value="score_pred">
         </form>
         <form action="{{ url_for('export') }}" method="post">
-            <input type="submit" value="export from flag" class="blue-button custom-button">
+            <input type="submit" value="Export from flag" class="blue-button btn">
             <input type="hidden" name="export_from" value="flag">
         </form>
         <a href="{{ url_for('refresh') }}">
-            <button class="top-button custom-button">refresh</button>
+            <button class="top-button btn">Refresh</button>
+        </a>
+        <a href="start.html">
+            <button class="secondary-btn session-btn">New session</button>
         </a>
     </div>
     <style>
@@ -51,59 +58,62 @@
     <div class="grid-container">
         {% for image in images %}
             <div class="grid-item">
+               <div class="grid-image clearfix">
                 <a href="/image/{{ image }}">
                     <img src="{{ url_for('image', image_name=image) }}" width="{{ width }}" style="width:100%; height:auto;">
-                    <div class="button-container">
+                </a>
+               </div>
+                    <div class="button-container clearfix">
                         <form action="{{ url_for('assign_metadata', image_name=image) }}" method="post">
-                            <input type="submit" value="good" class="good-image-button custom-button">
+                            <input type="submit" value="Good" class="good-image-button btn">
                             <input type="hidden" name="show" value="False">
                             <input type="hidden" name="col" value="label">
                             <input type="hidden" name="val" value="2">
                         </form>
                         <form action="{{ url_for('assign_metadata', image_name=image) }}" method="post">
-                            <input type="submit" value="bad" class="bad-image-button custom-button">
+                            <input type="submit" value="Bad" class="bad-image-button btn">
                             <input type="hidden" name="show" value="False">
                             <input type="hidden" name="col" value="label">
                             <input type="hidden" name="val" value="1">
                         </form>
                         <form action="{{ url_for('assign_metadata', image_name=image) }}" method="post">
-                            <input type="submit" value="1" class="score-image-button custom-button">
+                            <input type="submit" value="1" class="score-image-button btn">
                             <input type="hidden" name="show" value="False">
                             <input type="hidden" name="col" value="score">
                             <input type="hidden" name="val" value="1">
                         </form>
                         <form action="{{ url_for('assign_metadata', image_name=image) }}" method="post">
-                            <input type="submit" value="2" class="score-image-button custom-button">
+                            <input type="submit" value="2" class="score-image-button btn">
                             <input type="hidden" name="show" value="False">
                             <input type="hidden" name="col" value="score">
                             <input type="hidden" name="val" value="2">
                         </form>
                         <form action="{{ url_for('assign_metadata', image_name=image) }}" method="post">
-                            <input type="submit" value="3" class="score-image-button custom-button">
+                            <input type="submit" value="3" class="score-image-button btn">
                             <input type="hidden" name="show" value="False">
                             <input type="hidden" name="col" value="score">
                             <input type="hidden" name="val" value="3">
                         </form>
                         <form action="{{ url_for('assign_metadata', image_name=image) }}" method="post">
-                            <input type="submit" value="4" class="score-image-button custom-button">
+                            <input type="submit" value="4" class="score-image-button btn">
                             <input type="hidden" name="show" value="False">
                             <input type="hidden" name="col" value="score">
                             <input type="hidden" name="val" value="4">
                         </form>
                         <form action="{{ url_for('assign_metadata', image_name=image) }}" method="post">
-                            <input type="submit" value="5" class="score-image-button custom-button">
+                            <input type="submit" value="5" class="score-image-button btn">
                             <input type="hidden" name="show" value="False">
                             <input type="hidden" name="col" value="score">
                             <input type="hidden" name="val" value="5">
                         </form>
                         <form action="{{ url_for('assign_metadata', image_name=image) }}" method="post">
-                            <input type="submit" value="flag" class="flag-image-button custom-button">
+                            <input type="submit" value="Flag" class="flag-image-button btn">
                             <input type="hidden" name="show" value="True">
                             <input type="hidden" name="col" value="flag">
                             <input type="hidden" name="val" value="1">
                         </form>
                     </div>
-                </a>
+            
             </div>
         {% endfor %}
     </div>
