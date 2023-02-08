@@ -38,9 +38,11 @@ body {
 
 .top-container {
     display: flex;
-    padding: 10px;
-    margin-bottom: 30px;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    justify-content: left;
     }
 
 .branding {
@@ -80,6 +82,8 @@ body {
 
 .secondary-btn {
     padding: 5px 15px;
+    margin-left: 10px;
+    margin-bottom: 10px;
     border: 0;
     border-radius: 5px;
     background: rgba(255,255,255,1);
@@ -97,14 +101,20 @@ body {
 
 .top-button {
     background-color: rgb(126, 126, 126);
+    margin-left: 10px;
+    margin-bottom: 10px;
     }
 
 .blue-button {
     background-color: rgb(84, 100, 196);
+    margin-left: 10px;
+    margin-bottom: 10px;
     }
 
 .green-button {
     background-color: rgb(78, 156, 70);
+    margin-left: 10px;
+    margin-bottom: 10px;
     }
 
 .good-image-button {
