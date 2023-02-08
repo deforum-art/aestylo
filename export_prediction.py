@@ -3,12 +3,13 @@ import shutil
 from pathlib import Path
 
 def export_prediction(root_folder, database_file, export_from):
+    prefix = database_file.split(".")[0]
     database_path = Path(root_folder) / database_file
     df = pd.read_csv(database_path)
 
     if export_from == "label":
         df = df[["path", "label"]]
-        export_folder = Path(root_folder) / "export_label"
+        export_folder = Path(root_folder) / f"{prefix}_export_label"
         subfolder_good = export_folder / "good"
         subfolder_bad = export_folder / "bad"
         
@@ -26,7 +27,7 @@ def export_prediction(root_folder, database_file, export_from):
     
     elif export_from == "label_pred":
         df = df[["path", "label_pred"]]
-        export_folder = Path(root_folder) / "export_label_pred"
+        export_folder = Path(root_folder) / f"{prefix}_export_label_pred"
         subfolder_good = export_folder / "good"
         subfolder_bad = export_folder / "bad"
         
@@ -44,7 +45,7 @@ def export_prediction(root_folder, database_file, export_from):
 
     elif export_from == "score":
         df = df[["path", "score"]]
-        export_folder = Path(root_folder) / "export_score"
+        export_folder = Path(root_folder) / f"{prefix}_export_score"
         
         subfolder_1 = export_folder / "1"
         subfolder_2 = export_folder / "2"
@@ -78,7 +79,7 @@ def export_prediction(root_folder, database_file, export_from):
     
     elif export_from == "score_pred":
         df = df[["path", "score_pred"]]
-        export_folder = Path(root_folder) / "export_score_pred"
+        export_folder = Path(root_folder) / f"{prefix}_export_score_pred"
         
         subfolder_1_2 = export_folder / "1_2"
         subfolder_2_3 = export_folder / "2_3"
@@ -107,7 +108,7 @@ def export_prediction(root_folder, database_file, export_from):
 
     if export_from == "flag":
         df = df[["path", "flag"]]
-        export_folder = Path(root_folder) / "export_flag"
+        export_folder = Path(root_folder) / f"{prefix}_export_flag"
         
         if not export_folder.exists():
             export_folder.mkdir(parents=True)
@@ -115,6 +116,6 @@ def export_prediction(root_folder, database_file, export_from):
         for index, row in df.iterrows():
             image_path = Path(root_folder) / row["path"]
             if row["flag"] == 1:
-                shutil.copy2(image_path, subfolder_good)
+                shutil.copy2(image_path, export_folder)
 
     return
