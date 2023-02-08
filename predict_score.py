@@ -46,20 +46,40 @@ def print_stats(diff):
     print(f"max: {diff.max():0.4f}")
     print(f"min: {diff.min():0.4f}")
     print(f"mean: {diff.mean():0.4f}")
+    print(f"median: {diff.median():0.4f}")
     print(f"var: {diff.var():0.4f}")
 
 
-def validate_prediction(df):
+def validate_prediction(root_folder,database_file,train_from):
 
-    all = df[df.score!=0]
-    diff = all["score"] - all["score_pred"]
-    print("all -----------------")
-    print_stats(diff)
+    path = pathlib.Path(root_folder)
+    database_path = path / database_file
+    df = pd.read_csv(database_path)
 
-    for i in range(5,0,-1):
-        all = df[df.score==i]
+    if train_from == "score":
+
+        all = df[df.score!=0]
         diff = all["score"] - all["score_pred"]
-        print(f"{i} -----------------")
+        print("all -----------------")
         print_stats(diff)
+
+        for i in range(5,0,-1):
+            all = df[df.score==i]
+            diff = all["score"] - all["score_pred"]
+            print(f"{i} -----------------")
+            print_stats(diff)
+
+    if train_from == "label":
+
+        all = df[df.label!=0]
+        diff = all["label"] - all["label_pred"]
+        print("all -----------------")
+        print_stats(diff)
+
+        for i in range(2,0,-1):
+            all = df[df.score==i]
+            diff = all["label"] - all["label_pred"]
+            print(f"{i} -----------------")
+            print_stats(diff)
 
     return
