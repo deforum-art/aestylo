@@ -14,6 +14,7 @@ def normalized(a, axis=-1, order=2):
     
 
 def prepare_training_data(root_folder,database_file,train_from,clip_model="ViT-L/14"):
+    prefix = database_file.split(".")[0]
     path = pathlib.Path(root_folder)
     database_path = path / database_file
     database = pd.read_csv(database_path)
@@ -54,8 +55,8 @@ def prepare_training_data(root_folder,database_file,train_from,clip_model="ViT-L
 
     x = np.vstack(x)
     y = np.vstack(y)
-    x_out = f"x_{clip_model.replace('/', '').lower()}_ebeddings.npy"
-    y_out = f"y_{train_from}.npy"
+    x_out = f"{prefix}_x_{clip_model.replace('/', '').lower()}_ebeddings.npy"
+    y_out = f"{prefix}_y_{train_from}.npy"
     np.save(out_path / x_out, x)
     np.save(out_path / y_out, y)
     return
