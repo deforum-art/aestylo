@@ -26,5 +26,5 @@ python install_requirements.py
 
 4. Launch application by running the Python app.py script:
 ```
-python app.py --root_folder /path/to/images/
+python app.py
 ```
