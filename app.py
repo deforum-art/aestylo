@@ -60,7 +60,7 @@ def train():
 def training():
     global train_from
     prepare_training_data(root_folder,database_file,train_from)
-    train_predictor(root_folder,train_from)
+    train_predictor(root_folder,database_file,train_from)
     predict_score(root_folder,database_file,train_from)
     validate_prediction(root_folder,database_file,train_from)
     return redirect('/')

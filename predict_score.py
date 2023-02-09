@@ -10,11 +10,12 @@ from prepare_training_data import normalized
 
 
 def predict_score(root_folder, database_file, train_from, clip_model="ViT-L/14"):
+    prefix = database_file.split(".")[0]
     path = pathlib.Path(root_folder)
     database_path = path / database_file
     database = pd.read_csv(database_path)
     model = MLP(768)  # CLIP embedding dim is 768 for CLIP ViT L 14
-    model_name = f"linear_predictor_{clip_model.replace('/', '').lower()}_{train_from}_mse.pth"
+    model_name = f"{prefix}_linear_predictor_{clip_model.replace('/', '').lower()}_{train_from}_mse.pth"
     s = torch.load(path / model_name)   # load the model you trained previously or the model available in this repo
     model.load_state_dict(s)
     model.to("cuda")

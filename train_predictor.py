@@ -52,12 +52,13 @@ class MLP(pl.LightningModule):
         return optimizer
 
 
-def train_predictor(root_folder, train_from, clip_model="ViT-L/14", val_percentage=0.05, epochs=50, batch_size=256):
+def train_predictor(root_folder, database_file, train_from, clip_model="ViT-L/14", val_percentage=0.05, epochs=50, batch_size=256):
     
+    prefix = database_file.split(".")[0]
     out_path = pathlib.Path(root_folder)
-    x_out = f"x_{clip_model.replace('/', '').lower()}_ebeddings.npy"
-    y_out = f"y_{train_from}.npy"
-    save_name = f"linear_predictor_{clip_model.replace('/', '').lower()}_{train_from}_mse.pth"
+    x_out = f"{prefix}_x_{clip_model.replace('/', '').lower()}_ebeddings.npy"
+    y_out = f"{prefix}_y_{train_from}.npy"
+    save_name = f"{prefix}_linear_predictor_{clip_model.replace('/', '').lower()}_{train_from}_mse.pth"
     
     x = np.load(out_path / x_out)
     y = np.load(out_path / y_out)
